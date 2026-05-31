@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Сканер QR</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet">
@@ -322,25 +323,7 @@
       </div>
     </div>
 
-    <!-- Ввод суммы если нет в QR -->
-    <div id="amountInput" style="display:none; margin-bottom:16px;">
-      <div style="font-size:11px; color:var(--muted); margin-bottom:8px; letter-spacing:0.05em;">
-        СУММА НЕ УКАЗАНА В QR — ВВЕДИ ВРУЧНУЮ
-      </div>
-      <input
-        id="manualAmount"
-        type="number"
-        step="0.01"
-        placeholder="0.00"
-        style="
-          width:100%; padding:14px 16px;
-          background:var(--surface); border:1px solid var(--border);
-          border-radius:12px; color:var(--text);
-          font-family:'JetBrains Mono',monospace; font-size:20px;
-          font-weight:700; text-align:center; outline:none;
-        "
-      >
-    </div>
+
 
     <div class="btn-group" id="btnGroup">
       <button class="btn btn-secondary" onclick="rescan()">СНОВА</button>
@@ -522,30 +505,17 @@
 
   // Отправка в бот
   function sendToBot() {
-    let amount = 0;
-    const amountEl = document.getElementById('manualAmount');
-
-    if (document.getElementById('amountInput').style.display !== 'none') {
-      amount = parseFloat(amountEl.value);
-      if (!amount || amount <= 0) {
-        showError('Введи сумму покупки');
-        return;
-      }
-    } else {
-      // Парсим из текста
-      const txt = document.getElementById('resAmount').textContent;
-      amount = parseFloat(txt.replace(' ₽', '').replace(',', '.'));
-    }
+    const txt    = document.getElementById('resAmount').textContent;
+    const amount = parseFloat(txt.replace(' ₽', '').replace(',', '.')) || 0;
 
     const payload = JSON.stringify({
       qr:     scannedData,
-      amount: amount,
+      amount: amount,   // 0 если нет суммы — бот спросит в чате
     });
 
     if (tg) {
       tg.sendData(payload);
     } else {
-      // Для теста вне Telegram
       showError('Открой в Telegram');
       console.log('Payload:', payload);
     }
