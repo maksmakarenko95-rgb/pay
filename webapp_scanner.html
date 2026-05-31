@@ -457,7 +457,12 @@
     ctx.stroke();
 
     scannedData = data;
-    parseSBP(data);
+    console.log('QR DATA:', data);
+    // Показываем сырые данные для отладки
+    document.getElementById('resMerchant').textContent = data.substring(0, 30);
+    document.getElementById('resAmount').textContent = 'отправить?';
+    document.getElementById('resBank').textContent = data.length + ' символов';
+    setTimeout(() => panel.classList.add('show'), 100);
   }
 
   // Парсинг СБП QR
