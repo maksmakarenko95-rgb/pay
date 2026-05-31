@@ -492,16 +492,7 @@
   function showResult(merchant, amount, bank) {
     document.getElementById('resMerchant').textContent = merchant;
     document.getElementById('resBank').textContent     = bank;
-
-    if (amount > 0) {
-      document.getElementById('resAmount').textContent    = amount.toFixed(2) + ' ₽';
-      document.getElementById('amountInput').style.display = 'none';
-    } else {
-      document.getElementById('resAmount').textContent    = 'не указана';
-      document.getElementById('amountInput').style.display = 'block';
-      setTimeout(() => document.getElementById('manualAmount').focus(), 400);
-    }
-
+    document.getElementById('resAmount').textContent   = amount > 0 ? amount.toFixed(2) + ' ₽' : 'не указана';
     setTimeout(() => panel.classList.add('show'), 100);
   }
 
