@@ -511,16 +511,9 @@
       amount: amount,   // 0 если нет суммы — бот спросит в чате
     });
 
-    // Пробуем sendData, если не работает — показываем данные для копирования
-    if (tg && tg.initData) {
+    if (tg) {
       tg.sendData(payload);
-    } else if (tg) {
-      // Альтернатива: открываем бота с параметром
-      const encoded = encodeURIComponent(JSON.stringify({qr: scannedData, amount: amount}));
-      tg.openTelegramLink(`https://t.me/${window._botUsername || 'your_bot'}?start=qr_${encoded}`);
     } else {
-      // В браузере — показываем данные
-      alert('QR: ' + scannedData + '\nСумма: ' + amount);
       console.log('Payload:', payload);
     }
   }
