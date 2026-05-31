@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
     :root {
       --bg: #060a0f;
       --surface: #0d1520;
@@ -20,7 +20,7 @@
       --muted: #4a6080;
       --danger: #ff4560;
     }
-
+ 
     html, body {
       height: 100%;
       background: var(--bg);
@@ -29,7 +29,7 @@
       overflow: hidden;
       user-select: none;
     }
-
+ 
     /* фоновые точки */
     body::before {
       content: '';
@@ -39,14 +39,14 @@
       background-size: 28px 28px;
       pointer-events: none;
     }
-
+ 
     .app {
       display: flex;
       flex-direction: column;
       height: 100vh;
       position: relative;
     }
-
+ 
     /* ===== HEADER ===== */
     .header {
       padding: 16px 20px 12px;
@@ -56,7 +56,7 @@
       position: relative;
       z-index: 10;
     }
-
+ 
     .logo {
       font-family: 'Unbounded', sans-serif;
       font-size: 13px;
@@ -64,7 +64,7 @@
       letter-spacing: 0.05em;
       color: var(--accent);
     }
-
+ 
     .status-pill {
       display: flex;
       align-items: center;
@@ -79,16 +79,16 @@
       padding: 5px 10px;
       border-radius: 20px;
     }
-
+ 
     .status-dot {
       width: 6px; height: 6px;
       border-radius: 50%;
       background: var(--muted);
     }
     .status-dot.active { background: var(--accent); box-shadow: 0 0 6px var(--accent); animation: blink 1s ease-in-out infinite; }
-
+ 
     @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
-
+ 
     /* ===== SCANNER AREA ===== */
     .scanner-wrap {
       flex: 1;
@@ -98,14 +98,14 @@
       justify-content: center;
       padding: 0 20px;
     }
-
+ 
     .scanner-outer {
       width: 100%;
       max-width: 320px;
       aspect-ratio: 1;
       position: relative;
     }
-
+ 
     video {
       width: 100%;
       height: 100%;
@@ -113,11 +113,11 @@
       border-radius: 20px;
       display: block;
     }
-
+ 
     canvas#overlay {
       display: none;
     }
-
+ 
     /* угловые рамки */
     .corner {
       position: absolute;
@@ -130,7 +130,7 @@
     .corner.tr { top: -2px; right: -2px; border-width: 3px 3px 0 0; border-radius: 0 8px 0 0; }
     .corner.bl { bottom: -2px; left: -2px; border-width: 0 0 3px 3px; border-radius: 0 0 0 8px; }
     .corner.br { bottom: -2px; right: -2px; border-width: 0 3px 3px 0; border-radius: 0 0 8px 0; }
-
+ 
     /* линия сканирования */
     .scan-line {
       position: absolute;
@@ -147,12 +147,12 @@
       90%  { opacity: 1; }
       100% { top: 90%; opacity: 0; }
     }
-
+ 
     /* свечение при обнаружении */
     .scanner-outer.found video {
       box-shadow: 0 0 0 3px var(--accent), 0 0 40px rgba(0,229,180,0.3);
     }
-
+ 
     /* ===== HINT ===== */
     .hint {
       text-align: center;
@@ -162,7 +162,7 @@
       margin-top: 16px;
       padding: 0 20px;
     }
-
+ 
     /* ===== RESULT PANEL ===== */
     .result-panel {
       position: absolute;
@@ -176,13 +176,13 @@
       z-index: 20;
     }
     .result-panel.show { transform: translateY(0); }
-
+ 
     .result-icon {
       font-size: 48px;
       text-align: center;
       margin-bottom: 12px;
     }
-
+ 
     .result-title {
       font-family: 'Unbounded', sans-serif;
       font-size: 18px;
@@ -192,7 +192,7 @@
       margin-bottom: 24px;
       letter-spacing: -0.02em;
     }
-
+ 
     .result-card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -200,7 +200,7 @@
       padding: 20px;
       margin-bottom: 16px;
     }
-
+ 
     .result-row {
       display: flex;
       justify-content: space-between;
@@ -210,17 +210,17 @@
       font-size: 12px;
     }
     .result-row:last-child { border-bottom: none; }
-
+ 
     .result-label { color: var(--muted); }
     .result-value { color: var(--text); font-weight: 600; text-align: right; max-width: 60%; word-break: break-all; }
     .result-value.accent { color: var(--accent); font-size: 16px; }
-
+ 
     .btn-group {
       display: flex;
       gap: 10px;
       margin-top: auto;
     }
-
+ 
     .btn {
       flex: 1;
       padding: 16px;
@@ -234,7 +234,7 @@
       transition: transform 0.15s, opacity 0.15s;
     }
     .btn:active { transform: scale(0.97); }
-
+ 
     .btn-primary {
       background: linear-gradient(135deg, var(--accent), #00b890);
       color: #060a0f;
@@ -244,7 +244,7 @@
       border: 1px solid var(--border);
       color: var(--text);
     }
-
+ 
     /* ===== ERROR ===== */
     .error-banner {
       position: fixed;
@@ -259,7 +259,7 @@
       z-index: 30;
       display: none;
     }
-
+ 
     /* ===== NO CAMERA ===== */
     .no-camera {
       display: none;
@@ -280,7 +280,7 @@
 <body>
 <div class="app">
   <div class="header" style="display:none"></div>
-
+ 
   <div class="scanner-wrap">
     <div class="scanner-outer" id="scannerOuter">
       <video id="video" playsinline autoplay muted></video>
@@ -297,14 +297,14 @@
       <div style="font-size:10px;color:#2a3a50">Разреши доступ в настройках браузера</div>
     </div>
   </div>
-
+ 
   <p class="hint" id="hint">Наведи камеру на QR код кассы</p>
-
+ 
   <!-- Панель результата -->
   <div class="result-panel" id="resultPanel">
     <div class="result-icon">✅</div>
     <div class="result-title">QR РАСПОЗНАН</div>
-
+ 
     <div class="result-card">
       <div class="result-row">
         <span class="result-label">МАГАЗИН</span>
@@ -319,7 +319,7 @@
         <span class="result-value" id="resBank">—</span>
       </div>
     </div>
-
+ 
     <!-- Ввод суммы если нет в QR -->
     <div id="amountInput" style="display:none; margin-bottom:16px;">
       <div style="font-size:11px; color:var(--muted); margin-bottom:8px; letter-spacing:0.05em;">
@@ -339,16 +339,16 @@
         "
       >
     </div>
-
+ 
     <div class="btn-group">
       <button class="btn btn-secondary" onclick="rescan()">СНОВА</button>
       <button class="btn btn-primary" onclick="sendToBot()">ОТПРАВИТЬ</button>
     </div>
   </div>
-
+ 
   <div class="error-banner" id="errorBanner"></div>
 </div>
-
+ 
 <script>
   // Telegram WebApp
   const tg = window.Telegram?.WebApp;
@@ -356,7 +356,7 @@
     tg.ready();
     tg.expand();
   }
-
+ 
   const video    = document.getElementById('video');
   const overlay  = document.getElementById('overlay');
   const ctx      = overlay.getContext('2d');
@@ -365,11 +365,11 @@
   const hint     = document.getElementById('hint');
   const dot      = document.getElementById('statusDot') || {classList: {add:()=>{}, remove:()=>{}}};
   const statusTxt = document.getElementById('statusText') || {textContent: ''};
-
+ 
   let scanning   = true;
   let scannedData = null;
   let stream     = null;
-
+ 
   // Запуск камеры
   async function startCamera() {
     // Останавливаем предыдущий стрим если есть
@@ -377,7 +377,7 @@
       stream.getTracks().forEach(t => t.stop());
       stream = null;
     }
-
+ 
     try {
       stream = await navigator.mediaDevices.getUserMedia({
         video: {
@@ -387,12 +387,12 @@
         },
         audio: false,
       });
-
+ 
       video.setAttribute('playsinline', '');
       video.setAttribute('autoplay', '');
       video.setAttribute('muted', '');
       video.srcObject = stream;
-
+ 
       // iOS требует явного вызова play() после установки srcObject
       await new Promise((resolve, reject) => {
         video.onloadedmetadata = () => {
@@ -401,7 +401,7 @@
         video.onerror = reject;
         setTimeout(reject, 5000);  // таймаут 5 сек
       });
-
+ 
       dot.classList.add('active');
       statusTxt.textContent = 'СКАНИРОВАНИЕ';
       requestAnimationFrame(scanFrame);
@@ -412,38 +412,46 @@
       hint.textContent = 'Разреши доступ к камере и обнови страницу';
     }
   }
-
+ 
   // Сканирование кадров — скрытый canvas только для jsQR, видео живое
   const hiddenCanvas = document.createElement('canvas');
   const hiddenCtx    = hiddenCanvas.getContext('2d');
-
+ 
   function scanFrame() {
     if (!scanning) return;
     if (video.readyState === video.HAVE_ENOUGH_DATA) {
       hiddenCanvas.width  = video.videoWidth;
       hiddenCanvas.height = video.videoHeight;
       hiddenCtx.drawImage(video, 0, 0);
-
+ 
       const imageData = hiddenCtx.getImageData(0, 0, hiddenCanvas.width, hiddenCanvas.height);
       const code = jsQR(imageData.data, imageData.width, imageData.height, {
         inversionAttempts: 'dontInvert'
       });
-
+ 
       if (code) {
-        onQRFound(code.data, code.location);
-        return;
+        // Проверяем минимальный размер QR (не менее 10% экрана)
+        const loc    = code.location;
+        const qrW    = Math.abs(loc.topRightCorner.x - loc.topLeftCorner.x);
+        const qrH    = Math.abs(loc.bottomLeftCorner.y - loc.topLeftCorner.y);
+        const minSize = hiddenCanvas.width * 0.08;
+ 
+        if (qrW > minSize && qrH > minSize) {
+          onQRFound(code.data, code.location);
+          return;
+        }
       }
     }
     requestAnimationFrame(scanFrame);
   }
-
+ 
   // QR найден
   function onQRFound(data, location) {
     scanning = false;
     outer.classList.add('found');
     dot.classList.remove('active');
     statusTxt.textContent = 'НАЙДЕН';
-
+ 
     // Подсвечиваем QR на canvas
     ctx.strokeStyle = '#00e5b4';
     ctx.lineWidth   = 3;
@@ -454,17 +462,17 @@
     ctx.lineTo(location.bottomLeftCorner.x,  location.bottomLeftCorner.y);
     ctx.closePath();
     ctx.stroke();
-
+ 
     scannedData = data;
     parseSBP(data);
   }
-
+ 
   // Парсинг СБП QR
   function parseSBP(qr) {
     let merchant = 'Магазин';
     let amount   = 0;
     let bank     = '—';
-
+ 
     if (qr.includes('qr.nspk.ru')) {
       try {
         const url    = new URL(qr);
@@ -484,14 +492,14 @@
       merchant = fields['Name'] || 'Магазин';
       bank     = fields['BankName'] || fields['BIC'] || '—';
     }
-
+ 
     showResult(merchant, amount, bank);
   }
-
+ 
   function showResult(merchant, amount, bank) {
     document.getElementById('resMerchant').textContent = merchant;
     document.getElementById('resBank').textContent     = bank;
-
+ 
     if (amount > 0) {
       document.getElementById('resAmount').textContent    = amount.toFixed(2) + ' ₽';
       document.getElementById('amountInput').style.display = 'none';
@@ -500,15 +508,15 @@
       document.getElementById('amountInput').style.display = 'block';
       setTimeout(() => document.getElementById('manualAmount').focus(), 400);
     }
-
+ 
     setTimeout(() => panel.classList.add('show'), 100);
   }
-
+ 
   // Отправка в бот
   function sendToBot() {
     let amount = 0;
     const amountEl = document.getElementById('manualAmount');
-
+ 
     if (document.getElementById('amountInput').style.display !== 'none') {
       amount = parseFloat(amountEl.value);
       if (!amount || amount <= 0) {
@@ -520,12 +528,12 @@
       const txt = document.getElementById('resAmount').textContent;
       amount = parseFloat(txt.replace(' ₽', '').replace(',', '.'));
     }
-
+ 
     const payload = JSON.stringify({
       qr:     scannedData,
       amount: amount,
     });
-
+ 
     if (tg) {
       tg.sendData(payload);
     } else {
@@ -534,7 +542,7 @@
       console.log('Payload:', payload);
     }
   }
-
+ 
   // Повторное сканирование
   function rescan() {
     panel.classList.remove('show');
@@ -543,14 +551,14 @@
     scanning    = true;
     startCamera();  // перезапускаем камеру полностью
   }
-
+ 
   function showError(msg) {
     const el = document.getElementById('errorBanner');
     el.textContent   = msg;
     el.style.display = 'block';
     setTimeout(() => el.style.display = 'none', 3000);
   }
-
+ 
   // Старт
   startCamera();
 </script>
