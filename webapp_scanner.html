@@ -314,13 +314,27 @@
         <span class="result-value" id="resMerchant">—</span>
       </div>
       <div class="result-row">
-        <span class="result-label">СУММА</span>
-        <span class="result-value accent" id="resAmount">—</span>
-      </div>
-      <div class="result-row">
         <span class="result-label">БАНК</span>
         <span class="result-value" id="resBank">—</span>
       </div>
+    </div>
+
+    <div style="margin-bottom:16px;">
+      <div style="font-size:10px;color:var(--muted);letter-spacing:0.1em;margin-bottom:8px;">СУММА ПОКУПКИ ₽</div>
+      <input
+        id="amountInput"
+        type="number"
+        inputmode="decimal"
+        placeholder="0.00"
+        style="
+          width:100%;padding:16px;
+          background:var(--surface);border:1px solid var(--accent);
+          border-radius:14px;color:var(--text);
+          font-family:'JetBrains Mono',monospace;font-size:28px;
+          font-weight:700;text-align:center;outline:none;
+          -webkit-appearance:none;
+        "
+      >
     </div>
 
 
@@ -497,8 +511,15 @@
   function showResult(merchant, amount, bank) {
     document.getElementById('resMerchant').textContent = merchant;
     document.getElementById('resBank').textContent     = bank;
-    document.getElementById('resAmount').textContent   = amount > 0 ? amount.toFixed(2) + ' ₽' : 'не указана';
-    setTimeout(() => panel.classList.add('show'), 100);
+    // Если сумма есть в QR — подставляем автоматически
+    if (amount > 0) {
+      document.getElementById('amountInput').value = amount.toFixed(2);
+    }
+    setTimeout(() => {
+      panel.classList.add('show');
+      // Фокус на поле суммы
+      setTimeout(() => document.getElementById('amountInput').focus(), 400);
+    }, 100);
   }
 
   // Отправка в бот
