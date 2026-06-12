@@ -454,24 +454,8 @@
     dot.classList.remove('active');
     statusTxt.textContent = 'НАЙДЕН';
 
-    // Подсвечиваем QR на canvas
-    ctx.strokeStyle = '#00e5b4';
-    ctx.lineWidth   = 3;
-    ctx.beginPath();
-    ctx.moveTo(location.topLeftCorner.x,     location.topLeftCorner.y);
-    ctx.lineTo(location.topRightCorner.x,    location.topRightCorner.y);
-    ctx.lineTo(location.bottomRightCorner.x, location.bottomRightCorner.y);
-    ctx.lineTo(location.bottomLeftCorner.x,  location.bottomLeftCorner.y);
-    ctx.closePath();
-    ctx.stroke();
-
     scannedData = data;
-    console.log('QR DATA:', data);
-    // Показываем сырые данные для отладки
-    document.getElementById('resMerchant').textContent = data.substring(0, 30);
-    document.getElementById('resAmount').textContent = 'отправить?';
-    document.getElementById('resBank').textContent = data.length + ' символов';
-    setTimeout(() => panel.classList.add('show'), 100);
+    parseSBP(data);
   }
 
   // Парсинг СБП QR
