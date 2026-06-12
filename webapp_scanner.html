@@ -439,13 +439,8 @@
         const minSize = hiddenCanvas.width * 0.20;
 
         if (qrW > minSize && qrH > minSize) {
-          // Проверяем что это реально СБП QR а не случайный паттерн
-          const d = code.data;
-          const isSBP = d.includes('qr.nspk.ru') || d.startsWith('ST0') || d.includes('nspk');
-          if (isSBP) {
-            onQRFound(code.data, code.location);
-            return;
-          }
+          onQRFound(code.data, code.location);
+          return;
         }
       }
     }
